@@ -1,3 +1,77 @@
+class Department(object):
+    def give_salary(self):
+        if (self.experiance > 2):
+            self.salary += 200
+        elif (self.experiance > 5):
+            self.salary = self.salary * 1.2 + 500
+        elif(self.__class__ == Designer):
+            self.salary *= self.coef_effect
+        elif(self.__class__ == Manager):
+            if(len(self.team)>5):
+                self.salary += 200
+            elif(len(self.team) > 10):
+                self.salary += 300
+            elif(float(len(self.team))/2 < float(self.count_of_developers())):
+                self.salary *= 1.1
+        print('%s %s:\ngot salary: %s$' % (self.first_name, self.second_name, self.salary))
+
+
+class Emploee(Department):
+    def __init__(self, first_name, second_name, salary, experiance, manager):
+        self.first_name = first_name
+        self.second_name = second_name
+        self.salary = salary
+        self.experiance = experiance
+        self.manager = manager
+
+    def __str__(self):
+        return ('%s %s,\nmanager: %s,\nexperiance:%s')%(self.first_name,
+                                                        self.second_name,
+                                                        self.manager,
+                                                        self.experiance)
+
+class Developer(Emploee):
+    def __init__(self, first_name, second_name, salary, experiance, manager):
+        Emploee.__init__(self, first_name, second_name, salary, experiance, manager)
+
+class Designer(Emploee):
+    def __init__(self, first_name, second_name, salary, experiance, manager, coef_effect):
+        Emploee.__init__(self, first_name, second_name, salary, experiance, manager)
+        self.coef_effect = coef_effect
+
+class Manager(Emploee):
+
+    def __init__(self, first_name, second_name, salary, experiance , manager, team):
+        Emploee.__init__(self, first_name, second_name, salary, experiance, manager)
+        self.team = team
+
+    def list_of_managers(self):
+        for i in self.team:
+            print('%s: %s\n'%(self.first_name, i))
+
+    def count_of_developers(self):
+        dev = 0
+        for i in self.team:
+            if(i.__class__ == Developer):
+             dev += 1
+        return dev
+
+
+dev1 = Developer('Jack','Nickolson', 500, 2, 'Kristin')
+dev2 = Developer('Nini','Miras', 1400, 5, 'Kristin')
+dev3 = Developer('Rick','Strange', 1000, 3, 'Kristin')
+dev4 = Developer('Rick','Strange', 1000, 3, 'Kristin')
+des = Designer('Mira', 'Polson', 500, 2, 'Lili', 0.3)
+des1 = Designer('Lesli', 'Weson', 1400, 5, 'Lili', 0.7)
+manager = Manager('Lili', 'Krabs', 500, 2, 'Lili', [dev1, dev2, dev3, des, des1, dev3])
+
+# print(des1)
+# dev1.give_salary()
+# des.give_salary()
+# print(manager.count_of_developers())
+# manager.give_salary()
+# manager.list_of_managers()
+
 # 2) -----------------------------------------------------------
 class Node:
     def __init__(self, data):

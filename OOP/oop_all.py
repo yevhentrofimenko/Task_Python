@@ -3,8 +3,13 @@ class Department(object):
         self.list_managers = list_managers
 
     def print_list_managers(self):
-        for i in self.list_managers:
-            print(i.list_of_managers())
+        try:
+            for i in self.list_managers:
+                print(i.list_of_managers())
+            if(len(self.list_managers) == 0):
+                print('There is no managers in this department')
+        except AttributeError:
+                print('\n!!!! %s is Not Manager !!!!'%(i.first_name))
 
     def give_salary(self):
         if (self.experiance > 2):
@@ -53,10 +58,10 @@ class Manager(Emploee):
         self.team = team
 
     def list_of_managers(self):
-        team_list = []
-        for i in self.team:
-            team_list.append(i.first_name)
-        return '%s Team: %s'%(self.first_name, team_list)
+            team_list = []
+            for i in self.team:
+                team_list.append(i.first_name)
+            return '%s Team: %s'%(self.first_name, team_list)
 
     def count_of_developers(self):
         dev = 0
@@ -83,8 +88,10 @@ manager1 = Manager('Julia', 'Krabs', 500, 2, 'Julia', [dev5, dev6])
 # print(manager.count_of_developers())
 # manager.give_salary()
 # manager.list_of_managers()
-dep = Department([manager1, manager])
-dep.print_list_managers()
+# dep = Department([manager])
+# dep.print_list_managers()
+import unittest
+
 
 # 2) -----------------------------------------------------------
 class Node:

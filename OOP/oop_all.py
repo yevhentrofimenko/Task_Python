@@ -1,4 +1,11 @@
 class Department(object):
+    def __init__(self, list_managers):
+        self.list_managers = list_managers
+
+    def print_list_managers(self):
+        for i in self.list_managers:
+            print(i.list_of_managers())
+
     def give_salary(self):
         if (self.experiance > 2):
             self.salary += 200
@@ -46,8 +53,10 @@ class Manager(Emploee):
         self.team = team
 
     def list_of_managers(self):
+        team_list = []
         for i in self.team:
-            print('%s: %s\n'%(self.first_name, i))
+            team_list.append(i.first_name)
+        return '%s Team: %s'%(self.first_name, team_list)
 
     def count_of_developers(self):
         dev = 0
@@ -61,9 +70,12 @@ dev1 = Developer('Jack','Nickolson', 500, 2, 'Kristin')
 dev2 = Developer('Nini','Miras', 1400, 5, 'Kristin')
 dev3 = Developer('Rick','Strange', 1000, 3, 'Kristin')
 dev4 = Developer('Rick','Strange', 1000, 3, 'Kristin')
+dev5 = Developer('FF','Nickolson', 500, 4, 'Julia')
+dev6 = Developer('KK','Miras', 400, 2, 'Julia')
 des = Designer('Mira', 'Polson', 500, 2, 'Lili', 0.3)
 des1 = Designer('Lesli', 'Weson', 1400, 5, 'Lili', 0.7)
 manager = Manager('Lili', 'Krabs', 500, 2, 'Lili', [dev1, dev2, dev3, des, des1, dev3])
+manager1 = Manager('Julia', 'Krabs', 500, 2, 'Julia', [dev5, dev6])
 
 # print(des1)
 # dev1.give_salary()
@@ -71,6 +83,8 @@ manager = Manager('Lili', 'Krabs', 500, 2, 'Lili', [dev1, dev2, dev3, des, des1,
 # print(manager.count_of_developers())
 # manager.give_salary()
 # manager.list_of_managers()
+dep = Department([manager1, manager])
+dep.print_list_managers()
 
 # 2) -----------------------------------------------------------
 class Node:
